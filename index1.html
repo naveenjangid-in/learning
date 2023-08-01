@@ -1,1 +1,22 @@
 hello this is prod
+
+locals {
+    metadata_options = {
+      http_endpoint               = "enabled"
+      http_tokens                 = "required"
+      http_put_response_hop_limit = 2
+    }
+  
+    # EKS managed node group
+    default_update_config = {
+      max_unavailable_percentage = 33
+    }
+  
+    # Self-managed node group
+    default_instance_refresh = {
+      strategy = "Rolling"
+      preferences = {
+        min_healthy_percentage = 66
+      }
+    }
+  }
